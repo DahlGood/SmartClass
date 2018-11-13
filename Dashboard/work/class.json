@@ -1,0 +1,17 @@
+{
+    "1": {
+        "name": "Luke",
+		"studentID": 1000358,
+        "is_Present": false
+    },
+    "2": {
+        "name": "John",
+		"studentID": 12342386,
+        "is_Present": false
+    },
+    "3": {
+        "name": "Justin",
+		"studentID": 13498328,
+        "is_Present": false
+    }
+}

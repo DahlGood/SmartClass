@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 
 public class HomeController {
 	
+	//Declaring all editable components of the UI
 	@FXML private AnchorPane rootPane;
 	@FXML private Button homeButton;
 	@FXML private Button attendanceButton;
