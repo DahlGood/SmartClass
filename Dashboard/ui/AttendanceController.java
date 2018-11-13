@@ -1,14 +1,8 @@
 package ui;
 
-import work.ReadJSON;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import javax.xml.ws.Response;
-
-import com.google.gson.Gson;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import work.ReadJSON;
 
 public class AttendanceController {
 
@@ -53,21 +48,22 @@ public class AttendanceController {
 		System.out.print("Start Button Pressed.");
 		
 		ReadJSON read = new ReadJSON();
+		
+		//Starts to read student database.
 		read.read();
 		
-		//Gson gson = new Gson();
-		//Response response = gson.fromJson(json, Response.class);
-		
+		//Initializing data for iterations.
 		int count = read.getStudentCount();
 		int row = 0;
 		int nameBox = 1;
 		for(int i = 0; i < read.getStudentCount(); i++) {
 			
+			//Adds a new TextField to each student.
 			seat.add(new TextField());
+			//Sets students name to each TextField
 			seat.get(i).setText(read.getName(Integer.toString(nameBox)));
 			
-			//System.out.println(read.getName(Integer.toString(nameBox)));
-			
+			//Organzing each TextField into the appropriate cell.
 			if(count <= 7) {
 				grid.add(seat.get(i), 0, row);
 			}
@@ -89,10 +85,13 @@ public class AttendanceController {
 	
 	public void startAttendance() {
 		
+		//RUN FACIAL RECOGNITION PYTHON HERE.
+		
 	}
 	
 	public void clearStudents() {
 		
+		//Clears grid.
 		grid.getChildren().clear();
 		
 	}
