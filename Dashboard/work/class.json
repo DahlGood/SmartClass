@@ -1,16 +1,16 @@
 {
     "1": {
-        "name": "Luke",
+        "name": "Luke Dependahl",
 		"studentID": 1000358,
         "is_Present": false
     },
     "2": {
-        "name": "John",
+        "name": "John Widmaier",
 		"studentID": 12342386,
         "is_Present": false
     },
     "3": {
-        "name": "Justin",
+        "name": "Justin Walt",
 		"studentID": 13498328,
         "is_Present": false
     }

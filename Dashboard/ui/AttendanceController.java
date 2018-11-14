@@ -62,8 +62,9 @@ public class AttendanceController {
 			seat.add(new TextField());
 			//Sets students name to each TextField
 			seat.get(i).setText(read.getName(Integer.toString(nameBox)));
+			seat.get(i).setStyle("-fx-background-color: #282e36; -fx-text-fill: #e3e3e3; -fx-alignment: center;");
 			
-			//Organzing each TextField into the appropriate cell.
+			//Organizing each TextField into the appropriate cell.
 			if(count <= 7) {
 				grid.add(seat.get(i), 0, row);
 			}

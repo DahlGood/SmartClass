@@ -41,7 +41,7 @@
             </Pane>
             <Pane layoutY="60.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="960.0" style="-fx-background-color: #303841;">
                <children>
-                  <Button fx:id="startButton" layoutX="454.0" layoutY="41.0" mnemonicParsing="false" onAction="#startAttendance" text="Start" />
+                  <Button fx:id="startButton" layoutX="454.0" layoutY="41.0" mnemonicParsing="false" onAction="#startAttendance" style="-fx-background-color: #282e36; -fx-text-fill: #e3e3e3;" text="Start" />
                   <GridPane fx:id="grid" layoutX="12.0" layoutY="101.0" prefHeight="369.0" prefWidth="938.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -62,8 +62,8 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                   </GridPane>
-                  <Button fx:id="load" layoutX="335.0" layoutY="40.0" mnemonicParsing="false" onAction="#loadStudents" text="Load Students" />
-                  <Button fx:id="clear" layoutX="527.0" layoutY="40.0" mnemonicParsing="false" onAction="#clearStudents" text="Clear Students" />
+                  <Button fx:id="load" layoutX="335.0" layoutY="40.0" mnemonicParsing="false" onAction="#loadStudents" style="-fx-background-color: #282e36; -fx-text-fill: #e3e3e3;" text="Load Students" />
+                  <Button fx:id="clear" layoutX="527.0" layoutY="40.0" mnemonicParsing="false" onAction="#clearStudents" style="-fx-background-color: #282e36; -fx-text-fill: #e3e3e3;" text="Clear Students" />
                </children></Pane>
          </children>
       </Pane>
