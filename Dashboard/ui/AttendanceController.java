@@ -9,8 +9,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import work.ReadJSON;
 
 public class AttendanceController {
@@ -58,11 +60,34 @@ public class AttendanceController {
 		int nameBox = 1;
 		for(int i = 0; i < read.getStudentCount(); i++) {
 			
+			DropShadow absent = new DropShadow();
+			absent.setColor(Color.RED);
+			absent.setOffsetX(0f);
+			absent.setOffsetY(0f);
+			
+			DropShadow present = new DropShadow();
+			present.setColor(Color.GREEN);
+			present.setOffsetX(0f);
+			present.setOffsetY(0f);
+			
+			DropShadow late = new DropShadow();
+			late.setColor(Color.YELLOW);
+			late.setOffsetX(0f);
+			late.setOffsetY(0f);
+			
 			//Adds a new TextField to each student.
 			seat.add(new TextField());
+			
 			//Sets students name to each TextField
 			seat.get(i).setText(read.getName(Integer.toString(nameBox)));
 			seat.get(i).setStyle("-fx-background-color: #282e36; -fx-text-fill: #e3e3e3; -fx-alignment: center;");
+			
+			if(read.getStatus(Integer.toString(nameBox))) {
+				seat.get(i).setEffect(present);
+			}
+			else if(!read.getStatus(Integer.toString(nameBox))) {
+				seat.get(i).setEffect(absent);
+			}
 			
 			//Organizing each TextField into the appropriate cell.
 			if(count <= 7) {

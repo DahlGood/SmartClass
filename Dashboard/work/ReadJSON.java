@@ -40,4 +40,9 @@ public class ReadJSON {
 		return studentData.get("name").toString().replaceAll("\"", "");
 	}
 	
+	public boolean getStatus(String id) {
+		JsonObject studentData = (JsonObject)jsonObject.get(id);
+		return Boolean.parseBoolean(studentData.get("is_Present").toString().replaceAll("\"", ""));
+	}
+	
 }
