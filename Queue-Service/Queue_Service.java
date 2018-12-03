@@ -16,21 +16,25 @@ public class Queue_Service {
 
     public static void main(String[] args) throws Exception {
 
+        //access key and secret key credentials for created user
         AWSCredentials credentials = new BasicAWSCredentials("access_key_id", "access_key_secret");
         AmazonSQS sqs = AmazonSQSClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(credentials)).withRegion(Regions.US_EAST_1).build();
+        
+        //creating a queue called ScriptStarter
         CreateQueueRequest createQueueRequest = new CreateQueueRequest("ScriptStarter");
         String url = sqs.createQueue(createQueueRequest).getQueueUrl();
 
         
-        String message = "Hello";
+        //message sent to the queue
+        String message = "Begin taking attendance";
         
-
         send(credentials, sqs, url, message);
 
         receive(sqs, url);
 
     }
 
+    //sends the message above to the queue, checks every 30 seconds
     public static void send(AWSCredentials credentials, AmazonSQS sqs, String url, String message) {
 
         SendMessageRequest sendMessageStandardQueue = new SendMessageRequest().withQueueUrl(url).withMessageBody(message).withDelaySeconds(30);
@@ -38,7 +42,7 @@ public class Queue_Service {
         sqs.sendMessage(sendMessageStandardQueue);
 
     }
-
+    
     public static void receive(AmazonSQS sqs, String url) {
 
         ReceiveMessageRequest receiveMessageRequest = new ReceiveMessageRequest(url)
@@ -49,6 +53,7 @@ public class Queue_Service {
 
         System.out.println(msg.get(0));
         
+     //deletes the last message from the queue
      final String messageReceiptHandle = msg.get(0).getReceiptHandle();
      sqs.deleteMessage(new DeleteMessageRequest(url, messageReceiptHandle));
 
