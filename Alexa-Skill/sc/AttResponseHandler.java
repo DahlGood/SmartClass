@@ -26,7 +26,7 @@ public class AttResponseHandler implements RequestHandler {
     @Override
     public Optional<Response> handle(HandlerInput handlerInput) {
 
-        AWSCredentials credentials = new BasicAWSCredentials("AKIAIP6FJXLSG6ZSKPRA", "MnjNItNpmOVLRMAaK7aSsLOTFRAaUJffntrWwh0/");
+        AWSCredentials credentials = new BasicAWSCredentials("access_key_id", "access_key_secret");
         AmazonSQS sqs = AmazonSQSClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(credentials)).withRegion(Regions.US_EAST_1).build();
         CreateQueueRequest createQueueRequest = new CreateQueueRequest("ScriptStarter");
         String url = sqs.createQueue(createQueueRequest).getQueueUrl();
