@@ -8,6 +8,7 @@ import com.amazonaws.services.sqs.model.CreateQueueRequest;
 import com.amazonaws.services.sqs.model.Message;
 import com.amazonaws.services.sqs.model.ReceiveMessageRequest;
 import com.amazonaws.services.sqs.model.SendMessageRequest;
+import com.amazonaws.services.sqs.model.DeleteMessageRequest;
 
 import java.util.List;
 
@@ -20,9 +21,9 @@ public class Queue_Service {
         CreateQueueRequest createQueueRequest = new CreateQueueRequest("ScriptStarter");
         String url = sqs.createQueue(createQueueRequest).getQueueUrl();
 
+        
         String message = "Hello";
-
-
+        
 
         send(credentials, sqs, url, message);
 
@@ -47,6 +48,9 @@ public class Queue_Service {
         List<Message> msg = sqs.receiveMessage(receiveMessageRequest).getMessages();
 
         System.out.println(msg.get(0));
+        
+     final String messageReceiptHandle = msg.get(0).getReceiptHandle();
+     sqs.deleteMessage(new DeleteMessageRequest(url, messageReceiptHandle));
 
     }
 
