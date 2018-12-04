@@ -16,17 +16,23 @@ public class QueueReader {
 
     public QueueReader() {
 
-        AWSCredentials credentials = new BasicAWSCredentials("AKIAIP6FJXLSG6ZSKPRA", "MnjNItNpmOVLRMAaK7aSsLOTFRAaUJffntrWwh0/");
+         //access key and secret key credentials for created user
+        AWSCredentials credentials = new BasicAWSCredentials("access_key_id", "access_key_secret");
         AmazonSQS sqs = AmazonSQSClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(credentials)).withRegion(Regions.US_EAST_1).build();
+        
+        //creates queue request called ScriptStarter
         CreateQueueRequest createQueueRequest = new CreateQueueRequest("ScriptStarter");
         String url = sqs.createQueue(createQueueRequest).getQueueUrl();
 
+        //recieves the message
         ReceiveMessageRequest receiveMessageRequest = new ReceiveMessageRequest(url)
                 .withWaitTimeSeconds(10)
                 .withMaxNumberOfMessages(1);
 
+        //reads the message
         List<Message> msg = sqs.receiveMessage(receiveMessageRequest).getMessages();
 
+        //prints out the message
         System.out.println(msg);
 
     }
