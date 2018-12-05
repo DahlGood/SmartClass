@@ -7,11 +7,11 @@
     "2": {
         "name": "John Widmaier",
 		"studentID": 12342386,
-        "is_Present": false
+        "is_Present": true
     },
     "3": {
         "name": "Justin Walt",
 		"studentID": 13498328,
-        "is_Present": false
+        "is_Present": true
     }
 }

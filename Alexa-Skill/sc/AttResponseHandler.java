@@ -26,25 +26,23 @@ public class AttResponseHandler implements RequestHandler {
     @Override
     public Optional<Response> handle(HandlerInput handlerInput) {
 
-        //access key and secret key credentials for created user
-        AWSCredentials credentials = new BasicAWSCredentials("access_key_id", "access_key_secret");
+        //Creates connection to Amazon SQS with valid credentials.
+        AWSCredentials credentials = new BasicAWSCredentials("access_id", "access_key");
         AmazonSQS sqs = AmazonSQSClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(credentials)).withRegion(Regions.US_EAST_1).build();
-        
-        //creating a new queue called ScriptStarter
         CreateQueueRequest createQueueRequest = new CreateQueueRequest("ScriptStarter");
         String url = sqs.createQueue(createQueueRequest).getQueueUrl();
 
-        //message sent to queue
-        String message = "Test from skill 2";
+        //Message being sent to the queue.
+        String message = "Take Attendance";
 
-        //sends message to the queue
+        //Sends message to the queue.
         SendMessageRequest sendMessageStandardQueue = new SendMessageRequest().withQueueUrl(url).withMessageBody(message).withDelaySeconds(30);
-
         sqs.sendMessage(sendMessageStandardQueue);
 
-        //output message
+        //Message being read by the Alexa.
         String response = "Please look ahead... taking attendance.";
 
+        //Tells Alexa to read message
         return handlerInput.getResponseBuilder().withSpeech(response).build();
     }
 }

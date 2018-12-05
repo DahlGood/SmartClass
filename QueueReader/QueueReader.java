@@ -1,5 +1,3 @@
-package work;
-
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
@@ -16,28 +14,30 @@ public class QueueReader {
 
     public QueueReader() {
 
-         //access key and secret key credentials for created user
-        AWSCredentials credentials = new BasicAWSCredentials("access_key_id", "access_key_secret");
+        //Creating connection SQS service.
+        AWSCredentials credentials = new BasicAWSCredentials("access_id", "access_key");
         AmazonSQS sqs = AmazonSQSClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(credentials)).withRegion(Regions.US_EAST_1).build();
-        
-        //creates queue request called ScriptStarter
         CreateQueueRequest createQueueRequest = new CreateQueueRequest("ScriptStarter");
         String url = sqs.createQueue(createQueueRequest).getQueueUrl();
 
-        //recieves the message
+        //Retreiving the message from the queue.
         ReceiveMessageRequest receiveMessageRequest = new ReceiveMessageRequest(url)
                 .withWaitTimeSeconds(10)
                 .withMaxNumberOfMessages(1);
 
-        //reads the message
+        //Storing the message.
         List<Message> msg = sqs.receiveMessage(receiveMessageRequest).getMessages();
 
-        //prints out the message
-        System.out.println(msg);
-        
-        //deletes the last message from the queue
-        final String messageReceiptHandle = msg.get(0).getReceiptHandle();
-        sqs.deleteMessage(new DeleteMessageRequest(url, messageReceiptHandle));
+        /*
+
+        RUN FACIAL RECOGNITION HERE
+
+         */
+
+        //Deleting the message from the queue after it's been received.
+        for (Message m : msg) {
+            sqs.deleteMessage(url, m.getReceiptHandle());
+        }
 
     }
 

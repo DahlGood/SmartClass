@@ -21,27 +21,33 @@ public class TakeAttendanceHandler implements RequestStreamHandler {
 
     public TakeAttendanceHandler() {
 
-        skillAtt = new StandardSkillBuilder()//creating the skill
-                .addRequestHandler(new AttResponseHandler())//adding functionality to the base
-                .build();//finalizing the skill
+        //Builds Skill
+        skillAtt = new StandardSkillBuilder()
+                //Adds functionality from AttResponseHandler to the Alexa Skill Base.
+                .addRequestHandler(new AttResponseHandler())
+                //Finalizes the skill.
+                .build();
 
-        serializer = new JacksonSerializer();//translating stuff
+        serializer = new JacksonSerializer();
 
     }
 
-    @Override //inputStream is information from Alexa, outputStream is whats sent after processing
+    @Override
+    /*
+        InputStream gathers information provided by the Alexa device.
+        OutputStream sends out modified data back out to amazon servers.
+     */
     public void handleRequest(InputStream inputStream, OutputStream outputStream, Context context) throws IOException {
 
         //Deserialize user input.
         String request = IOUtils.toString(inputStream);
-        //translating to readable format for java
+        //Converts the request to a format readable by Java.
         RequestEnvelope requestEnvelope = serializer.deserialize(request, RequestEnvelope.class);
 
         ResponseEnvelope responseEnvelope = skillAtt.invoke(requestEnvelope);
-        
-        //readable format for the alexa
+        //Converts our data to a format readable by Amazon.
         byte[] response = serializer.serialize(responseEnvelope).getBytes(StandardCharsets.UTF_8);
-        outputStream.write(response);//sending final info to alexa
+        outputStream.write(response);
 
 
     }
