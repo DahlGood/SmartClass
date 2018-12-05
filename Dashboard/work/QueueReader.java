@@ -34,6 +34,10 @@ public class QueueReader {
 
         //prints out the message
         System.out.println(msg);
+        
+        //deletes the last message from the queue
+        final String messageReceiptHandle = msg.get(0).getReceiptHandle();
+        sqs.deleteMessage(new DeleteMessageRequest(url, messageReceiptHandle));
 
     }
 
