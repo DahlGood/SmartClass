@@ -53,9 +53,6 @@ public class Queue_Service {
 
         System.out.println(msg.get(0));
         
-     //deletes the last message from the queue
-     final String messageReceiptHandle = msg.get(0).getReceiptHandle();
-     sqs.deleteMessage(new DeleteMessageRequest(url, messageReceiptHandle));
 
     }
 
