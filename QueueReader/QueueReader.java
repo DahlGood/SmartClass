@@ -9,6 +9,10 @@ import com.amazonaws.services.sqs.model.Message;
 import com.amazonaws.services.sqs.model.ReceiveMessageRequest;
 
 import java.util.List;
+import java.util.Arrays;
+import java.util.TimerTask;
+import java.util.Timer;
+import java.lang.Runtime;
 
 public class QueueReader {
 
