@@ -10,8 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import work.ReadJSON;
-
 public class Display extends Application{
 		
 	public static void main(String[] args) throws FileNotFoundException {
@@ -28,7 +26,7 @@ public class Display extends Application{
 		Scene scene = new Scene(root);
 		stage.setTitle("SmartClass");
 		//LOGO
-		//stage.getIcons().add(new Image(Display.class.getResourceAsStream(""))); 
+		stage.getIcons().add(new Image(Display.class.getResourceAsStream("assets/logo.png")));
 		stage.setScene(scene);
 		stage.show();
 		
