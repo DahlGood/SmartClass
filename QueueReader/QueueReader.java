@@ -28,11 +28,23 @@ public class QueueReader {
         //Storing the message.
         List<Message> msg = sqs.receiveMessage(receiveMessageRequest).getMessages();
 
-        /*
+        //Creating TimerTask
+        TimerTask timerTask = new TimerTask()
+        {
+            String[] path = { "./faceRecognition/video_face_counter.py" };
 
-        RUN FACIAL RECOGNITION HERE
+            public void run()
 
-         */
+            {
+                //if the message contains "Take attendance", the facial recognition will run
+                if(Arrays.asList(msg).contains("Take attendance"))
+                    Runtime.getRuntime().exec(path);            }
+
+        };
+
+        //Timer repeats the run() method every 3 seconds
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(timerTask, 0, 3000);
 
         //Deleting the message from the queue after it's been received.
         for (Message m : msg) {
